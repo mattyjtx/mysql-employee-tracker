@@ -171,7 +171,7 @@ function addEmployee() {
     inquirer.prompt([
           {
             name: "lastName",
-            type: "rawlist",
+            type: "list",
             choices: function() {
               var lastName = [];
               for (var i = 0; i < res.length; i++) {
@@ -183,7 +183,7 @@ function addEmployee() {
           },
           {
             name: "role",
-            type: "rawlist",
+            type: "list",
             message: "What is the Employees new title? ",
             choices: selectRole()
           },
