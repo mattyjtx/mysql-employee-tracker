@@ -147,14 +147,9 @@ function addEmployee() {
     ]).then(function (val) {
       var roleId = selectRole().indexOf(val.role) + 1
       var managerId = selectManager().indexOf(val.choice) + 1
-      connection.query("INSERT INTO employee SET ?", 
-      {
-          first_name: val.firstName,
-          last_name: val.lastName,
-          manager_id: managerId,
-          role_id: roleId
-          
-      }, function(err){
+      console.log(val);
+      connection.query("INSERT INTO employee (first_name, last_name, manager_id, role_id) VALUES(val.firstname, val.lastname, managerId, roleId)", 
+       function(err){
           if (err) throw err
           console.table(val)
           startPrompt()
@@ -177,6 +172,7 @@ function addEmployee() {
               for (var i = 0; i < res.length; i++) {
                 lastName.push(res[i].last_name);
               }
+              console.log(lastName);
               return lastName;
             },
             message: "What is the Employee's last name? ",
