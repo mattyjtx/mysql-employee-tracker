@@ -145,14 +145,16 @@ function addEmployee() {
             choices: selectManager()
         }
     ]).then(function (val) {
-      var roleId = selectRole().indexOf(val.role) + 1
-      var managerId = selectManager().indexOf(val.choice) + 1
+      var roleId = selectRole().indexOf(val.role) + 1;
+      var managerId = selectManager().indexOf(val.choice) + 1;
       console.log(val);
-      connection.query("INSERT INTO employee (first_name, last_name, manager_id, role_id) VALUES(val.firstname, val.lastname, managerId, roleId)", 
-       function(err){
-          if (err) throw err
-          console.table(val)
-          startPrompt()
+      connection.query(
+        "INSERT INTO employee (first_name, last_name, manager_id, role_id) VALUES(?, ?, ?, ?)",
+        [val.firstname, val.lastname, managerId, roleId],
+        function (err) {
+          if (err) throw err;
+          console.table(val);
+          startPrompt();
       })
 
   })
